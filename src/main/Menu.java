@@ -1,6 +1,5 @@
 package main;
 
-import music.MusicPlay;
 import ventana.VentanaGris;
 import ventana.VentanaPrincipal;
 
@@ -19,16 +18,11 @@ public class Menu {
             b.setVisible(true);
         }
     }
-
-    public static void musica() {
-       // MusicPlay music=true;
-
-        //music.setVolume(0.1f);
-        //music.setNivel(1);
-    }
-
+    
     public static void main(String[] args) {
+        
 
+        //Inica la ventana
         iniciaPartida();
 
     }

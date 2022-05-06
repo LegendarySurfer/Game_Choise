@@ -1,8 +1,13 @@
 package ventana;
 
+import music.MusicPlay;
+
 public class VentanaGris extends javax.swing.JFrame {
 
+    MusicPlay music = new MusicPlay();
+
     public VentanaGris() {
+
         initComponents();
         this.setLocationRelativeTo(null); //PONE LA VENTANA EN EL CENTRO
     }
@@ -122,9 +127,9 @@ public class VentanaGris extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_nuevoJuegoActionPerformed
 
     private void boton_OpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_OpcionesActionPerformed
-      
+
         dispose();
-        VentanaOpciones a = new VentanaOpciones();
+        VentanaOpciones a = new VentanaOpciones(music);
         a.setVisible(true);
 
     }//GEN-LAST:event_boton_OpcionesActionPerformed

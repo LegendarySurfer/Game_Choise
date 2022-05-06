@@ -180,6 +180,10 @@ public class VentanaPartidas extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_VolverActionPerformed
 
     private void boton_primeraPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_primeraPartidaActionPerformed
+        
+        //Comprobar que no exista ya la partida
+        
+        
         dispose();
         VentanaNegraHistoria a = new VentanaNegraHistoria();
         a.setVisible(true);
@@ -187,12 +191,14 @@ public class VentanaPartidas extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_primeraPartidaActionPerformed
 
     private void boton_segundaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_segundaPartidaActionPerformed
+       //Guardar partida
         dispose();
         VentanaNegraHistoria a = new VentanaNegraHistoria();
         a.setVisible(true);
     }//GEN-LAST:event_boton_segundaPartidaActionPerformed
 
     private void boton_TerceraPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_TerceraPartidaActionPerformed
+        //Guardar partida
         dispose();
         VentanaNegraHistoria a = new VentanaNegraHistoria();
         a.setVisible(true);

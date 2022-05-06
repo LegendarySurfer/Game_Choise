@@ -1,12 +1,16 @@
 package ventana;
 
 import javax.swing.JOptionPane;
+import music.MusicPlay;
 
 public class VentanaOpciones extends javax.swing.JFrame {
 
-    private boolean sonido=false;
-    public VentanaOpciones() {
+    private boolean sonido = false;
+    private MusicPlay music;
+    
+    public VentanaOpciones(MusicPlay music) {
         initComponents();
+        this.music = music;
         this.setLocationRelativeTo(null); //PONE LA VENTANA EN EL CENTRO
     }
 
@@ -105,27 +109,29 @@ public class VentanaOpciones extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_VolverActionPerformed
 
     private void boton_IdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_IdiomaActionPerformed
-        
-        
-        JOptionPane.showMessageDialog(null,"Solo español,te jodes y estudias.");
-        
+
+        JOptionPane.showMessageDialog(null, "Solo español,te jodes y estudias.");
+
     }//GEN-LAST:event_boton_IdiomaActionPerformed
 
     private void boton_CreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_CreditosActionPerformed
-       
+
         JOptionPane.showMessageDialog(null, " Creado por: LS \n Desarrollado por: LS \n Musica puesta por: LS");
-        
-        
+
+
     }//GEN-LAST:event_boton_CreditosActionPerformed
 
     private void botonSonidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSonidoActionPerformed
-      
-        if(sonido){
+
+        if (sonido) {
             botonSonido.setText("Quitar sonido");
-            sonido=false;
-        }else{
+            sonido = !sonido;
+            music.play();
+
+        } else {
             botonSonido.setText("Activar sonido");
-            sonido=true;
+            sonido = !sonido;
+          music.stop();
         }
     }//GEN-LAST:event_botonSonidoActionPerformed
 

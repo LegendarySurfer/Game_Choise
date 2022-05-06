@@ -22,7 +22,7 @@ public class MusicPlay {
         activado = true;
         nivel = 2;
         try {
-            AudioInputStream audioIntro = AudioSystem.getAudioInputStream(new File("src/music/MusicaIntro.mp3").getAbsoluteFile());
+            AudioInputStream audioIntro = AudioSystem.getAudioInputStream(new File("src/music/MusicaIntro.wav").getAbsoluteFile());
             clip = AudioSystem.getClip();
             clip.open(audioIntro);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
