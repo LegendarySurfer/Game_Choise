@@ -1,7 +1,7 @@
 package ventana;
 
 import gestor.Gestor_Jugador;
-import gestor.Textos;
+import gestor.TextosEspanol;
 import javax.swing.JOptionPane;
 import modelo.Jugador;
 
@@ -11,7 +11,7 @@ public class VentanaNegraHistoria extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null); //PONE LA VENTANA EN EL CENTRO
 
-        String texto = Textos.nombrePersonanje();
+        String texto = TextosEspanol.nombrePersonanje();
         texto_historia.setText(texto);
 
     }
@@ -82,24 +82,33 @@ public class VentanaNegraHistoria extends javax.swing.JFrame {
 
     }//GEN-LAST:event_nombre_PersonajeActionPerformed
 
+    //Boton siguiente
     private void boton_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_siguienteActionPerformed
+        textoUno();
+       
+    }//GEN-LAST:event_boton_siguienteActionPerformed
 
-        if (nombre_Personaje.getText().equals("")) {
+    
+    //Sale el primer texto
+    private void textoUno(){
+             if (nombre_Personaje.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "¿Como?");
         } else {
             String personaje = nombre_Personaje.getText();
             nombre_Personaje.setText("");
-            String texto = Textos.nombrePerro();
+            String texto = TextosEspanol.nombrePerro();
             texto_historia.setText(texto);
             String perro = nombre_Personaje.getText();
             Jugador j = new Jugador(personaje, perro, 1);
-            Gestor_Jugador.meterJugador(j);
-                    
+            Gestor_Jugador.meterJugador(j);           
         }
-
-
-    }//GEN-LAST:event_boton_siguienteActionPerformed
-
+            
+            
+        }
+    
+   
+    
+    
     private void guardaPartida() {
 
         nombre_Personaje.getText();
