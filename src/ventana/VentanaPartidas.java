@@ -1,10 +1,17 @@
 package ventana;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import modelo.Jugador;
+
 public class VentanaPartidas extends javax.swing.JFrame {
 
     public VentanaPartidas() {
         initComponents();
         this.setLocationRelativeTo(null); //PONE LA VENTANA EN EL CENTRO
+        setNombrees();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -14,13 +21,13 @@ public class VentanaPartidas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         nombrePersonajeUno = new javax.swing.JLabel();
         nombrePersonajeDos = new javax.swing.JLabel();
+        nombrePersonajeTres = new javax.swing.JLabel();
         texto_Tiempo_Primer = new javax.swing.JLabel();
         texto_donde_va_tiempo_primero = new javax.swing.JLabel();
         texto_donde_va_tiempo_segundo = new javax.swing.JLabel();
         texto_donde_va_tiempo_tercero = new javax.swing.JLabel();
         texto_Tiempo_Segundo = new javax.swing.JLabel();
         texto_Tiempo_tercer = new javax.swing.JLabel();
-        nombrePersonajeTres = new javax.swing.JLabel();
         nombre_primero = new javax.swing.JLabel();
         nombre_tercero = new javax.swing.JLabel();
         nombre_segundo = new javax.swing.JLabel();
@@ -41,13 +48,17 @@ public class VentanaPartidas extends javax.swing.JFrame {
 
         nombrePersonajeUno.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         nombrePersonajeUno.setForeground(new java.awt.Color(255, 255, 255));
-        nombrePersonajeUno.setText("---");
         jPanel1.add(nombrePersonajeUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 380, 30));
 
         nombrePersonajeDos.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         nombrePersonajeDos.setForeground(new java.awt.Color(255, 255, 255));
         nombrePersonajeDos.setText("---");
         jPanel1.add(nombrePersonajeDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 250, 320, 40));
+
+        nombrePersonajeTres.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        nombrePersonajeTres.setForeground(new java.awt.Color(255, 255, 255));
+        nombrePersonajeTres.setText("---");
+        jPanel1.add(nombrePersonajeTres, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 460, 370, 40));
 
         texto_Tiempo_Primer.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         texto_Tiempo_Primer.setForeground(new java.awt.Color(255, 255, 255));
@@ -72,11 +83,6 @@ public class VentanaPartidas extends javax.swing.JFrame {
         texto_Tiempo_tercer.setForeground(new java.awt.Color(255, 255, 255));
         texto_Tiempo_tercer.setText("Tiempo:");
         jPanel1.add(texto_Tiempo_tercer, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, 70, 30));
-
-        nombrePersonajeTres.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        nombrePersonajeTres.setForeground(new java.awt.Color(255, 255, 255));
-        nombrePersonajeTres.setText("---");
-        jPanel1.add(nombrePersonajeTres, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 460, 370, 40));
 
         nombre_primero.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         nombre_primero.setForeground(new java.awt.Color(255, 255, 255));
@@ -171,6 +177,88 @@ public class VentanaPartidas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private String setNombrePrimeraPartida() {
+        try {
+            FileInputStream ficheroEntrada = new FileInputStream("PrimeraPartida");
+            ObjectInputStream objetoEntrada = new ObjectInputStream(ficheroEntrada);
+            //Se leen objeto de la clase Jugador
+            Jugador j = (Jugador) objetoEntrada.readObject();
+            objetoEntrada.close();
+            String personaje = j.getNombrePersonaje();
+            return personaje;
+
+        } catch (IOException e) {
+            System.out.println("Error:" + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return "null";
+    }
+
+    private String setNombreSegundaPartida() {
+        try {
+            FileInputStream ficheroEntrada = new FileInputStream("SegundaPartida");
+            ObjectInputStream objetoEntrada = new ObjectInputStream(ficheroEntrada);
+            //Se leen objeto de la clase Jugador
+            Jugador j = (Jugador) objetoEntrada.readObject();
+            objetoEntrada.close();
+            String personaje = j.getNombrePersonaje();
+            return personaje;
+
+        } catch (IOException e) {
+            System.out.println("Error:" + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return "null";
+    }
+
+    private String setNombreTerceraPartida() {
+        try {
+            FileInputStream ficheroEntrada = new FileInputStream("TerceraPartida");
+            ObjectInputStream objetoEntrada = new ObjectInputStream(ficheroEntrada);
+            //Se leen objeto de la clase Jugador
+            Jugador j = (Jugador) objetoEntrada.readObject();
+            objetoEntrada.close();
+            String personaje = j.getNombrePersonaje();
+            return personaje;
+
+        } catch (IOException e) {
+            System.out.println("Error:" + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return "null";
+    }
+
+    private void setNombrees() {
+
+       String uno=setNombrePrimeraPartida();
+        String dos=setNombreSegundaPartida();
+        String tres=setNombreTerceraPartida();
+        
+        
+        if (uno.equalsIgnoreCase("null")) {
+            nombrePersonajeUno.setText("---");
+        } else {
+            nombrePersonajeUno.setText(setNombrePrimeraPartida());
+        }
+
+        if (dos.equalsIgnoreCase("null")) {
+            nombrePersonajeDos.setText("---");
+        } else {
+            nombrePersonajeDos.setText(setNombreSegundaPartida());
+        }
+
+        if (tres.equalsIgnoreCase("null")) {
+            nombrePersonajeTres.setText("---");
+        } else {
+            nombrePersonajeTres.setText(setNombreTerceraPartida());
+        }
+
+    }
+
+
     private void boton_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_VolverActionPerformed
         dispose();
         VentanaGris a = new VentanaGris();
@@ -180,10 +268,8 @@ public class VentanaPartidas extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_VolverActionPerformed
 
     private void boton_primeraPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_primeraPartidaActionPerformed
-        
+
         //Comprobar que no exista ya la partida
-        
-        
         dispose();
         VentanaNegraHistoria a = new VentanaNegraHistoria();
         a.setVisible(true);
@@ -191,7 +277,7 @@ public class VentanaPartidas extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_primeraPartidaActionPerformed
 
     private void boton_segundaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_segundaPartidaActionPerformed
-       //Guardar partida
+        //Guardar partida
         dispose();
         VentanaNegraHistoria a = new VentanaNegraHistoria();
         a.setVisible(true);

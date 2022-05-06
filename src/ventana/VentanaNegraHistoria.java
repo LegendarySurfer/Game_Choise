@@ -11,9 +11,8 @@ public class VentanaNegraHistoria extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null); //PONE LA VENTANA EN EL CENTRO
 
-        String texto = TextosEspanol.nombrePersonanje();
-        texto_historia.setText(texto);
-
+        //String texto = TextosEspanol.nombrePersonanje();
+        //texto_historia.setText(texto);
     }
 
     @SuppressWarnings("unchecked")
@@ -32,8 +31,9 @@ public class VentanaNegraHistoria extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        texto_historia.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         texto_historia.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(texto_historia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1000, 100));
+        jPanel2.add(texto_historia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1000, 180));
 
         boton_siguiente.setBackground(new java.awt.Color(0, 0, 0));
         boton_siguiente.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -53,7 +53,7 @@ public class VentanaNegraHistoria extends javax.swing.JFrame {
                 nombre_PersonajeActionPerformed(evt);
             }
         });
-        jPanel2.add(nombre_Personaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 310, 50));
+        jPanel2.add(nombre_Personaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 310, 50));
 
         titulo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         titulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -84,14 +84,14 @@ public class VentanaNegraHistoria extends javax.swing.JFrame {
 
     //Boton siguiente
     private void boton_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_siguienteActionPerformed
-        textoUno();
-       
+        //textoUno();
+        String texto = TextosEspanol.opcionTresDosDos();
+        texto_historia.setText(texto);
     }//GEN-LAST:event_boton_siguienteActionPerformed
 
-    
     //Sale el primer texto
-    private void textoUno(){
-             if (nombre_Personaje.getText().equals("")) {
+    private void textoUno() {
+        if (nombre_Personaje.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "¿Como?");
         } else {
             String personaje = nombre_Personaje.getText();
@@ -100,15 +100,11 @@ public class VentanaNegraHistoria extends javax.swing.JFrame {
             texto_historia.setText(texto);
             String perro = nombre_Personaje.getText();
             Jugador j = new Jugador(personaje, perro, 1);
-            Gestor_Jugador.meterJugador(j);           
+            Gestor_Jugador.meterJugador(j);
         }
-            
-            
-        }
-    
-   
-    
-    
+
+    }
+
     private void guardaPartida() {
 
         nombre_Personaje.getText();
