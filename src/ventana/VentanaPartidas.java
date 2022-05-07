@@ -1,14 +1,22 @@
 package ventana;
 
+import gestor.Gestor_Fichero;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import javax.swing.JOptionPane;
 import modelo.Jugador;
 
 public class VentanaPartidas extends javax.swing.JFrame {
 
     public VentanaPartidas() {
         initComponents();
+        setIconImage(getIconImage());   //PONE ICONO DE IMAGEN
         this.setLocationRelativeTo(null); //PONE LA VENTANA EN EL CENTRO
         setNombrees();
 
@@ -33,6 +41,9 @@ public class VentanaPartidas extends javax.swing.JFrame {
         nombre_segundo = new javax.swing.JLabel();
         linea = new javax.swing.JLabel();
         lineaDos = new javax.swing.JLabel();
+        boton_Borrar_Partida_Uno = new javax.swing.JButton();
+        boton_Borrar_Partida_Dos = new javax.swing.JButton();
+        boton_Borrar_Partida_Tres = new javax.swing.JButton();
         boton_Volver = new javax.swing.JButton();
         boton_primeraPartida = new javax.swing.JButton();
         boton_segundaPartida = new javax.swing.JButton();
@@ -109,6 +120,39 @@ public class VentanaPartidas extends javax.swing.JFrame {
         lineaDos.setText("------------------------------------------------------------------------------------------------------------");
         jPanel1.add(lineaDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, 700, -1));
 
+        boton_Borrar_Partida_Uno.setBackground(new java.awt.Color(0, 0, 0));
+        boton_Borrar_Partida_Uno.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        boton_Borrar_Partida_Uno.setForeground(new java.awt.Color(255, 255, 255));
+        boton_Borrar_Partida_Uno.setText("Borrar Partida");
+        boton_Borrar_Partida_Uno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_Borrar_Partida_UnoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(boton_Borrar_Partida_Uno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 160, 60));
+
+        boton_Borrar_Partida_Dos.setBackground(new java.awt.Color(0, 0, 0));
+        boton_Borrar_Partida_Dos.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        boton_Borrar_Partida_Dos.setForeground(new java.awt.Color(255, 255, 255));
+        boton_Borrar_Partida_Dos.setText("Borrar Partida");
+        boton_Borrar_Partida_Dos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_Borrar_Partida_DosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(boton_Borrar_Partida_Dos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 160, 70));
+
+        boton_Borrar_Partida_Tres.setBackground(new java.awt.Color(0, 0, 0));
+        boton_Borrar_Partida_Tres.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        boton_Borrar_Partida_Tres.setForeground(new java.awt.Color(255, 255, 255));
+        boton_Borrar_Partida_Tres.setText("Borrar Partida");
+        boton_Borrar_Partida_Tres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_Borrar_Partida_TresActionPerformed(evt);
+            }
+        });
+        jPanel1.add(boton_Borrar_Partida_Tres, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 160, 60));
+
         boton_Volver.setBackground(new java.awt.Color(0, 0, 0));
         boton_Volver.setForeground(new java.awt.Color(255, 255, 255));
         boton_Volver.setText("Volver");
@@ -139,7 +183,7 @@ public class VentanaPartidas extends javax.swing.JFrame {
                 boton_segundaPartidaActionPerformed(evt);
             }
         });
-        jPanel1.add(boton_segundaPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 280, 110));
+        jPanel1.add(boton_segundaPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 280, 110));
 
         boton_TerceraPartida.setBackground(new java.awt.Color(102, 0, 0));
         boton_TerceraPartida.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -150,7 +194,7 @@ public class VentanaPartidas extends javax.swing.JFrame {
                 boton_TerceraPartidaActionPerformed(evt);
             }
         });
-        jPanel1.add(boton_TerceraPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, 280, 120));
+        jPanel1.add(boton_TerceraPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 460, 280, 120));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/fondo_partidas.jpg"))); // NOI18N
         jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1220, 660));
@@ -177,12 +221,24 @@ public class VentanaPartidas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //------------ Establece el icono del juego --------------------------------
+    @Override
+    public Image getIconImage() {
+
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagen/Icono.jpg"));
+        return retValue;
+    }
+
+    //Peta
+    //---------------------- Coge los nombre de las partidas -------------------
     private String setNombrePrimeraPartida() {
         try {
             FileInputStream ficheroEntrada = new FileInputStream("PrimeraPartida");
             ObjectInputStream objetoEntrada = new ObjectInputStream(ficheroEntrada);
             //Se leen objeto de la clase Jugador
+            
             Jugador j = (Jugador) objetoEntrada.readObject();
+
             objetoEntrada.close();
             String personaje = j.getNombrePersonaje();
             return personaje;
@@ -192,7 +248,7 @@ public class VentanaPartidas extends javax.swing.JFrame {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return "null";
+        return "";
     }
 
     private String setNombreSegundaPartida() {
@@ -210,7 +266,7 @@ public class VentanaPartidas extends javax.swing.JFrame {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return "null";
+        return "";
     }
 
     private String setNombreTerceraPartida() {
@@ -228,29 +284,29 @@ public class VentanaPartidas extends javax.swing.JFrame {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return "null";
+        return "";
     }
 
+    //-Establece los nombres en el menu para saber si existe una partida creada-
     private void setNombrees() {
 
-       String uno=setNombrePrimeraPartida();
-        String dos=setNombreSegundaPartida();
-        String tres=setNombreTerceraPartida();
-        
-        
-        if (uno.equalsIgnoreCase("null")) {
+        String uno = setNombrePrimeraPartida();
+        String dos = setNombreSegundaPartida();
+        String tres = setNombreTerceraPartida();
+
+        if (uno.equalsIgnoreCase("")) {
             nombrePersonajeUno.setText("---");
         } else {
             nombrePersonajeUno.setText(setNombrePrimeraPartida());
         }
 
-        if (dos.equalsIgnoreCase("null")) {
+        if (dos.equalsIgnoreCase("")) {
             nombrePersonajeDos.setText("---");
         } else {
             nombrePersonajeDos.setText(setNombreSegundaPartida());
         }
 
-        if (tres.equalsIgnoreCase("null")) {
+        if (tres.equalsIgnoreCase("")) {
             nombrePersonajeTres.setText("---");
         } else {
             nombrePersonajeTres.setText(setNombreTerceraPartida());
@@ -258,7 +314,7 @@ public class VentanaPartidas extends javax.swing.JFrame {
 
     }
 
-
+    //------------------------ Boton de volver ---------------------------------
     private void boton_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_VolverActionPerformed
         dispose();
         VentanaGris a = new VentanaGris();
@@ -267,11 +323,12 @@ public class VentanaPartidas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_boton_VolverActionPerformed
 
+    //---------------------- Boton para iniciar las partidas -------------------
     private void boton_primeraPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_primeraPartidaActionPerformed
 
         //Comprobar que no exista ya la partida
         dispose();
-        VentanaNegraHistoria a = new VentanaNegraHistoria();
+        VentanaNegraHistoria a = new VentanaNegraHistoria(1);
         a.setVisible(true);
 
     }//GEN-LAST:event_boton_primeraPartidaActionPerformed
@@ -279,21 +336,47 @@ public class VentanaPartidas extends javax.swing.JFrame {
     private void boton_segundaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_segundaPartidaActionPerformed
         //Guardar partida
         dispose();
-        VentanaNegraHistoria a = new VentanaNegraHistoria();
+        VentanaNegraHistoria a = new VentanaNegraHistoria(2);
         a.setVisible(true);
     }//GEN-LAST:event_boton_segundaPartidaActionPerformed
 
     private void boton_TerceraPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_TerceraPartidaActionPerformed
         //Guardar partida
         dispose();
-        VentanaNegraHistoria a = new VentanaNegraHistoria();
+        VentanaNegraHistoria a = new VentanaNegraHistoria(3);
         a.setVisible(true);
     }//GEN-LAST:event_boton_TerceraPartidaActionPerformed
 
-    private int x, y;
+    
+    //------------------------------Boton para borrar las partidas -------------
+    private void boton_Borrar_Partida_UnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_Borrar_Partida_UnoActionPerformed
 
+        
+        File f = new File ("PrimeraPartida");
+        f.delete();
+        Jugador j = new Jugador("","",1);
+        Gestor_Fichero.ficheroGuardaDatosUsuarioDelPrimero(j);
+    }//GEN-LAST:event_boton_Borrar_Partida_UnoActionPerformed
 
+    private void boton_Borrar_Partida_DosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_Borrar_Partida_DosActionPerformed
+       File f = new File ("SegundaPartida");
+        f.delete();
+        Jugador j = new Jugador("","",1);
+        Gestor_Fichero.ficheroGuardaDatosUsuarioDelSegundo(j);
+    }//GEN-LAST:event_boton_Borrar_Partida_DosActionPerformed
+
+    private void boton_Borrar_Partida_TresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_Borrar_Partida_TresActionPerformed
+        File f = new File ("TerceraPartida");
+        f.delete();
+        Jugador j = new Jugador("","",1);
+        Gestor_Fichero.ficheroGuardaDatosUsuarioDelTercero(j);
+    }//GEN-LAST:event_boton_Borrar_Partida_TresActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boton_Borrar_Partida_Dos;
+    private javax.swing.JButton boton_Borrar_Partida_Tres;
+    private javax.swing.JButton boton_Borrar_Partida_Uno;
     private javax.swing.JButton boton_TerceraPartida;
     private javax.swing.JButton boton_Volver;
     private javax.swing.JButton boton_primeraPartida;

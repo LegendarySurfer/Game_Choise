@@ -1,5 +1,7 @@
 package ventana;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import music.MusicPlay;
 
@@ -10,6 +12,7 @@ public class VentanaOpciones extends javax.swing.JFrame {
     
     public VentanaOpciones(MusicPlay music) {
         initComponents();
+         setIconImage(getIconImage());   //PONE ICONO DE IMAGEN
         this.music = music;
         this.setLocationRelativeTo(null); //PONE LA VENTANA EN EL CENTRO
     }
@@ -101,6 +104,14 @@ public class VentanaOpciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     @Override
+    public Image getIconImage() {
+
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagen/Icono.jpg"));
+        return retValue;
+    }
+
+    
     private void boton_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_VolverActionPerformed
         dispose();
         VentanaGris a = new VentanaGris();

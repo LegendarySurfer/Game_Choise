@@ -1,5 +1,7 @@
 package main;
 
+import gestor.Gestor_Fichero;
+import modelo.Jugador;
 import ventana.VentanaGris;
 import ventana.VentanaPrincipal;
 
@@ -18,10 +20,9 @@ public class Menu {
             b.setVisible(true);
         }
     }
-    
+
     public static void main(String[] args) {
         
-
         //Inica la ventana
         iniciaPartida();
 

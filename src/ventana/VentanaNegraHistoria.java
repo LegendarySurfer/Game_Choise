@@ -1,18 +1,24 @@
 package ventana;
 
+import gestor.Gestor_Fichero;
 import gestor.Gestor_Jugador;
 import gestor.TextosEspanol;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import modelo.Jugador;
 
 public class VentanaNegraHistoria extends javax.swing.JFrame {
 
-    public VentanaNegraHistoria() {
-        initComponents();
-        this.setLocationRelativeTo(null); //PONE LA VENTANA EN EL CENTRO
+    int puntoPartida;
 
-        //String texto = TextosEspanol.nombrePersonanje();
-        //texto_historia.setText(texto);
+    public VentanaNegraHistoria(int puntoPartida) {
+        initComponents();
+        setIconImage(getIconImage());   //PONE ICONO DE IMAGEN
+        this.setLocationRelativeTo(null); //PONE LA VENTANA EN EL CENTRO
+        this.puntoPartida = puntoPartida; //Depende del punto de partida se guarda en un sitio o en otro
+        String texto = TextosEspanol.nombrePersonanje(); //Texto PROLOGO
+        texto_historia.setText(texto);
     }
 
     @SuppressWarnings("unchecked")
@@ -77,19 +83,35 @@ public class VentanaNegraHistoria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //------------------ Establece el icono ------------------------------------
+    @Override
+    public Image getIconImage() {
+
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagen/Icono.jpg"));
+        return retValue;
+    }
+
+    //------------------------ Recoge la informacion ---------------------------- 
     private void nombre_PersonajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_PersonajeActionPerformed
 
 
     }//GEN-LAST:event_nombre_PersonajeActionPerformed
 
-    //Boton siguiente
+    //-------------------------- Boton siguiente -------------------------------
     private void boton_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_siguienteActionPerformed
-        //textoUno();
-        String texto = TextosEspanol.opcionTresDosDos();
-        texto_historia.setText(texto);
+
+        if (puntoPartida == 1) {
+            textoUno();
+        } else if (puntoPartida == 2) {
+            textoDos();
+        } else {
+            textoTres();
+        }
+
+
     }//GEN-LAST:event_boton_siguienteActionPerformed
 
-    //Sale el primer texto
+    //----------- Dependiendo del fichero se guarda en uno o en otro -----------
     private void textoUno() {
         if (nombre_Personaje.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "¿Como?");
@@ -100,17 +122,40 @@ public class VentanaNegraHistoria extends javax.swing.JFrame {
             texto_historia.setText(texto);
             String perro = nombre_Personaje.getText();
             Jugador j = new Jugador(personaje, perro, 1);
-            Gestor_Jugador.meterJugador(j);
+            Gestor_Fichero.ficheroGuardaDatosUsuarioDelPrimero(j);
         }
 
     }
 
-    private void guardaPartida() {
+    private void textoDos() {
+        if (nombre_Personaje.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "¿Como?");
+        } else {
+            String personaje = nombre_Personaje.getText();
+            nombre_Personaje.setText("");
+            String texto = TextosEspanol.nombrePerro();
+            texto_historia.setText(texto);
+            String perro = nombre_Personaje.getText();
+            Jugador j = new Jugador(personaje, perro, 1);
+            Gestor_Fichero.ficheroGuardaDatosUsuarioDelSegundo(j);
+        }
 
-        nombre_Personaje.getText();
-        int puntoPartida = 1;
     }
 
+    private void textoTres() {
+        if (nombre_Personaje.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "¿Como?");
+        } else {
+            String personaje = nombre_Personaje.getText();
+            nombre_Personaje.setText("");
+            String texto = TextosEspanol.nombrePerro();
+            texto_historia.setText(texto);
+            String perro = nombre_Personaje.getText();
+            Jugador j = new Jugador(personaje, perro, 1);
+            Gestor_Fichero.ficheroGuardaDatosUsuarioDelTercero(j);
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boton_siguiente;

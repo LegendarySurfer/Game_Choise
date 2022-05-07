@@ -10,33 +10,33 @@ public class Gestor_Fichero {
 
     public static void ficheroGuardaDatosUsuarioDelPrimero(Jugador j) {
         try {
-            FileOutputStream fos = new FileOutputStream("/src/ficheros/PrimeraPartida");
+            FileOutputStream fos = new FileOutputStream("PrimeraPartida");
             ObjectOutputStream salida = new ObjectOutputStream(fos);
             salida.writeObject(j);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error.");
+            JOptionPane.showMessageDialog(null, "No se ha podido crear la partida guardada.");
         }
 
     }
 
     public static void ficheroGuardaDatosUsuarioDelSegundo(Jugador j) {
         try {
-            FileOutputStream fos = new FileOutputStream("/ficheros/SegundaPartida");
+            FileOutputStream fos = new FileOutputStream("SegundaPartida");
             ObjectOutputStream salida = new ObjectOutputStream(fos);
             salida.writeObject(j);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error.");
+            JOptionPane.showMessageDialog(null, "No se ha podido crear la partida guardada.");
         }
 
     }
 
     public static void ficheroGuardaDatosUsuarioDelTercero(Jugador j) {
         try {
-            FileOutputStream fos = new FileOutputStream("/ficheros/TerceraPartida");
+            FileOutputStream fos = new FileOutputStream("TerceraPartida");
             ObjectOutputStream salida = new ObjectOutputStream(fos);
             salida.writeObject(j);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error.");
+            JOptionPane.showMessageDialog(null, "No se ha podido crear la partida guardada.");
         }
     }
 
